@@ -14,3 +14,9 @@ This assumes that you already have an empty mongodb cluster set up.
 `DB_NAME`
 `COLLECTION_NAME`
 `CONNECT_STRING `
+
+
+
+### Running the script
+
+#### To start filling the database, run the `tool_driver.py` program in your terminal.
