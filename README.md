@@ -17,6 +17,10 @@ This assumes that you already have an empty mongodb cluster set up.
 
 
 
+
+
+
+
 ### Running the script
 
 #### To start filling the database, run the `tool_driver.py` program in your terminal.
