@@ -1,15 +1,18 @@
 import requests
-import config
+# import config
 import pymongo
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 
 
 
-
-DB_NAME = ''
-COLLECTION_NAME = ''
-CONNECT_STRING = ""
+# TODO
+# Fixing db_name and collection name because databases are weirdly named in mongodb
+db_name = 'wiki'
+collection_name = 'pages'
+PW = "RJtiq2R3RyPOVY8q"
+USR_NME="admin_4_wds"
+CONNECT_STRING = "mongodb+srv://admin_4_wds:RJtiq2R3RyPOVY8q@cluster0.bxpu9.mongodb.net/wiki?retryWrites=true&w=majority"
 connect = pymongo.MongoClient(CONNECT_STRING)
 
 
