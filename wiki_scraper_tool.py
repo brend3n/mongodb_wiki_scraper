@@ -10,15 +10,30 @@ from bs4 import BeautifulSoup
 # Fixing db_name and collection name because databases are weirdly named in mongodb
 db_name = 'wiki'
 collection_name = 'pages'
-PW = "RJtiq2R3RyPOVY8q"
-USR_NME="admin_4_wds"
-CONNECT_STRING = "mongodb+srv://admin_4_wds:RJtiq2R3RyPOVY8q@cluster0.bxpu9.mongodb.net/wiki?retryWrites=true&w=majority"
-connect = pymongo.MongoClient(CONNECT_STRING)
+
+# 1
+# PW = "RJtiq2R3RyPOVY8q"
+# USR_NME="admin_4_wds"
+
+# 2
+# PW = trees
+# USR_NME = "admin"
 
 
+admin_usr = str(input("Enter a database admin username: "))
+admin_pw = str(input("Enter database admin password: "))
+
+
+def create_connect_str(user,pw):
+	return str(f'mongodb+srv://{user}:{pw}@cluster0.bxpu9.mongodb.net/wiki?retryWrites=true&w=majority')
+
+
+connect_str = create_connect_str(admin_usr, admin_pw)
+
+connect = pymongo.MongoClient(connect_str)
 
 client = connect
-db = client.DB_NAME
+db = client.db_name
 
 
 def get_soup(url):
@@ -67,7 +82,7 @@ def store(page_name, links):
 		"num_links" : len(links)
 	}
 	try:
-		db.COLLECTION_NAME.insert_one(page_data_model)
+		db.pages.insert_one(page_data_model)
 	except Exception as e:
 		print(f"Error: {e}")
 		print(f"Could not insert link data of {page_name}.")
@@ -77,7 +92,7 @@ def store(page_name, links):
 
 def check_if_exists(page_name):
         try:
-            count = db.COLLECTION_NAME.count_documents({"page_name":page_name})
+            count = db.pages.count_documents({"page_name":page_name})
             if count > 0:
                 return True
             return False
